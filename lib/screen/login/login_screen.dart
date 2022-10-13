@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:oem_huahuan_1013/main.dart';
+import 'package:oem_huahuan_1013/screen/main/main_screen.dart';
 
 const users = {
   'admin': '123456',
@@ -45,11 +45,7 @@ class LoginScreen extends StatelessWidget {
       hideForgotPasswordButton: true,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (ctx) => const MyHomePage(
-              title: '主页',
-            ),
-          ),
+          MaterialPageRoute(builder: (ctx) => const MainScreen()),
         );
       },
       // logo: ,
