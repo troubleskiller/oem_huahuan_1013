@@ -42,10 +42,11 @@ class LoginScreen extends StatelessWidget {
       userType: LoginUserType.name,
       userValidator: defaultEmailValidator,
       onRecoverPassword: (String a) {},
+      hideForgotPasswordButton: true,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (ctx) => MyHomePage(
+            builder: (ctx) => const MyHomePage(
               title: '主页',
             ),
           ),
