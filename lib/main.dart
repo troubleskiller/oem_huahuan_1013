@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/screen/login/login_screen.dart';
+import 'package:oem_huahuan_1013/screen/main/main_screen.dart';
+import 'package:provider/provider.dart';
+
+import 'model/measure_detail_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+      MultiProvider(providers: [ChangeNotifierProvider(
+        create: (context) => MeasureDetailModel(),
+      ),],child: const MyApp(),)
+      );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: MainScreen(),
     );
   }
 }

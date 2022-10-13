@@ -1,6 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
-import 'package:oem_huahuan_1013/screen/test/test_screen.dart';
+import 'package:oem_huahuan_1013/screen/measure/measure_main_screen.dart';
+import 'package:oem_huahuan_1013/screen/test/test_connect_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -21,6 +22,13 @@ class MainScreen extends StatelessWidget {
           BrnNormalButton(
             text: '测量',
             fontSize: 40,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => MeasureMainScreen(),
+                ),
+              );
+            },
           ),
           BrnNormalButton(
             text: '查询',
@@ -32,7 +40,7 @@ class MainScreen extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (ctx) => TestScreen(),
+                  builder: (ctx) => TestConnectScreen(),
                 ),
               );
             },
