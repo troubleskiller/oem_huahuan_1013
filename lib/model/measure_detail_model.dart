@@ -94,4 +94,11 @@ class MeasureDetailModel with ChangeNotifier {
       notifyListeners();
     }
   }
+  void resetDetail() {
+      x = 0;
+      y = 0;
+      tmp = 0;
+      bat = 0;
+      notifyListeners();
+  }
 }

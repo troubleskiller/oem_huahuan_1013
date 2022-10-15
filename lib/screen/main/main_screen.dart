@@ -1,7 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/screen/measure/measure_main_screen.dart';
-import 'package:oem_huahuan_1013/screen/test/test_connect_screen.dart';
+import 'package:oem_huahuan_1013/screen/connect_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);

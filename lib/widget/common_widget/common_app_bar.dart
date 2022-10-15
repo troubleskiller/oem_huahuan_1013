@@ -65,12 +65,13 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Visibility(
                     visible: showBackBtn && replaceBackBtnWith == null,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Increase the tap area of the back button using padding in widget
                         IconButton(
                           icon: const Icon(
                             Icons.arrow_back,
-                            color: Colors.black,
+                            color: Colors.white,
                           ),
                           onPressed:
                               () {
@@ -112,7 +113,7 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 // title
                                 Text(
                                   title ?? '',
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headline4?.copyWith(fontSize: 10),
                                 ),
                                 const SizedBox(height: 30),
                                 // subtitle
@@ -127,6 +128,7 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                   ),
+                  SizedBox(width: 30,),
                   // title only
                   Visibility(
                     visible: subtitle == null && child == null,
@@ -134,7 +136,7 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Text(
                         title ??'',
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headline4?.copyWith(fontSize: 20 ,fontWeight: FontWeight.bold,letterSpacing: 5,color: Colors.white),
                       ),
                     ),
                   ),

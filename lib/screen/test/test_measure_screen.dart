@@ -34,18 +34,10 @@ class _TestState extends State<Test> {
   List<double> measureList = [];
   List<List<double>> measureMainList = [];
   List<MeasureModel> trueList = [];
-
-  bool isTest = true;
-
-  bool doTest = true;
-
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
-    ///should do
-    widget.device.disconnect();
   }
 
   @override
@@ -57,8 +49,10 @@ class _TestState extends State<Test> {
     ///should do
     widget.device.state.listen((state) {
       if (state == BluetoothDeviceState.disconnected) {
-        print('设备断开了连接了');
-        Navigator.pop(context);
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (ctx) => MainScreen(),
+            ),);
       }
     });
   }
@@ -81,10 +75,9 @@ class _TestState extends State<Test> {
             Icons.arrow_back,
             color: Colors.blue,
           ),
-          onPressed: () {
+          onPressed: () async {
             widget.device.disconnect();
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (ctx) => MainScreen()));
+
           },
         ),
         centerTitle: true,
@@ -96,37 +89,47 @@ class _TestState extends State<Test> {
               MeasureList(),
               Column(
                 children: [
-                GestureDetector(
-                  onTap: (){
-                    writeDataToDevice();
-                  },
-                  child: Container(
-                      height: 50,
-                      width: 200,
-                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      decoration: const BoxDecoration(
-                        color: Colors.blueGrey,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          '开始测试',
-                          style: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            color: Colors.white,
-                            letterSpacing: 3,
-                            fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () {
+                      writeDataToDevice();
+                    },
+                    child: Container(
+                        height: 50,
+                        width: 200,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        decoration: const BoxDecoration(
+                          color: Colors.blueGrey,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25),
                           ),
                         ),
-                      )),
-                ),
-                  SizedBox(height: 50,),
-                Text('请注意：测试页面的x轴、y轴并非最终测试结果。',style: TextStyle(color: Colors.grey,fontStyle: FontStyle.italic),),
-                  SizedBox(height: 50,),
-              ],)
+                        child: Center(
+                          child: Text(
+                            '开始测试',
+                            style: TextStyle(
+                              fontStyle: FontStyle.normal,
+                              fontSize: 15,
+                              color: Colors.white,
+                              letterSpacing: 3,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Text(
+                    '请注意：测试页面的x轴、y轴并非最终测试结果。',
+                    style: TextStyle(
+                        color: Colors.grey, fontStyle: FontStyle.italic),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              )
             ]),
       ),
     );
@@ -174,7 +177,9 @@ class _TestState extends State<Test> {
               //     (sin(double.parse(differString[1])) * mult).toStringAsFixed(3));
               double tmp = double.parse(differString[2]);
               double bat = CommonHelper.toInt(double.parse(differString[3]));
-              context.read<MeasureDetailModel>().updateDetail(x, y, tmp, bat);
+              if(mounted){
+                context.read<MeasureDetailModel>().updateDetail(x, y, tmp, bat);
+              }
             }
           }
         },

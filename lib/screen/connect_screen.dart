@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:oem_huahuan_1013/model/measure_detail_model.dart';
 import 'package:oem_huahuan_1013/screen/test/test_measure_screen.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/common_app_bar.dart';
+import 'package:provider/provider.dart';
 
 class TestConnectScreen extends StatefulWidget {
   const TestConnectScreen({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class _TestConnectScreenState extends State<TestConnectScreen> {
       (list) => {
         if (list.isNotEmpty)
           {
+        context.read<MeasureDetailModel>().resetDetail(),
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (ctx) => Test(
@@ -67,6 +70,7 @@ class _TestConnectScreenState extends State<TestConnectScreen> {
     BluetoothDevice device = scanResults[index].device;
     //跳转
     await device.connect();
+    context.read<MeasureDetailModel>().resetDetail();
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
           builder: (ctx) => Test(
@@ -79,7 +83,7 @@ class _TestConnectScreenState extends State<TestConnectScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomTopAppBar(
-          title: '     选择设备',
+          title: '选择设备',
           backButtonOnPressed: () {
             flutterBlue.stopScan();
           },
