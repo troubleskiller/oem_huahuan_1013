@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -47,12 +46,10 @@ class _TestState extends State<Test> {
     findServices();
 
     ///should do
-    widget.device.state.listen((state) {
+    widget.device.state.listen(
+            (state) {
       if (state == BluetoothDeviceState.disconnected) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (ctx) => MainScreen(),
-            ),);
+        Navigator.pop(context);
       }
     });
   }
@@ -77,7 +74,10 @@ class _TestState extends State<Test> {
           ),
           onPressed: () async {
             widget.device.disconnect();
-
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) => MainScreen(),
+                ),);
           },
         ),
         centerTitle: true,
@@ -121,7 +121,7 @@ class _TestState extends State<Test> {
                     height: 50,
                   ),
                   Text(
-                    '请注意：测试页面的x轴、y轴并非最终测试结果。',
+                    '请注意：测试页面的x轴、y轴并非最终计算结果。',
                     style: TextStyle(
                         color: Colors.grey, fontStyle: FontStyle.italic),
                   ),
