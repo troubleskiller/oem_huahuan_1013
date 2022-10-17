@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/model/hole_model.dart';
+import 'package:oem_huahuan_1013/screen/measure/connect_screen.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/dialog_widget.dart';
 import 'package:oem_huahuan_1013/widget/project_widget/project_widget.dart';
 
@@ -125,22 +126,17 @@ class MeasureHoleList extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              onTap: () async {
-                                                // BluetoothDevice.fromId(id)
-                                                //
-                                                // await device.connect(
-                                                //   // timeout: const Duration(seconds: 20), autoConnect: true
-                                                // );
-                                                // Navigator.push(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             ConnectBluePage(
-                                                //               holeModel:
-                                                //               holeModel,
-                                                //               isDouble:
-                                                //               _switchSelected,
-                                                //             )));
+                                              onTap: () {
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ConnectScreen(
+                                                              holeModel:
+                                                              holeModel,
+                                                              isDouble:
+                                                              _switchSelected,
+                                                            )));
                                               },
                                             ),
                                           ],
