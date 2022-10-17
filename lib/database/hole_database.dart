@@ -87,6 +87,17 @@ class HoleDatabaseService {
       print('删除表中所有id字段为$id的记录，共删除$count条记录');
     }
   }
+  Future<void> deleteGroup(int noM) async {
+    Database database = await _getDatabase();
+    int count =
+    await database.rawDelete('DELETE FROM hole_info WHERE noM = ?', [noM]);
+    //上面这条语句等价于下面这条语句
+    //int count=await database.delete("user_info",where: 'name = ?', whereArgs: ['徐晖']);
+
+    if (kDebugMode) {
+      print('删除表中所有noM字段为$noM的记录，共删除$count条记录');
+    }
+  }
 
   ///将表中所有name字段为徐晖的记录的name字段值改成王克鸿
   Future<void> _updateRow() async {

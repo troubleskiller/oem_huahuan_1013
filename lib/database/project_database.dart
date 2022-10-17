@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:oem_huahuan_1013/model/peoject_model.dart';
 import 'package:sqflite/sqflite.dart';
 
+import 'hole_database.dart';
+
 
 const String databaseName = "project.db";
 bool isInit = true;
@@ -70,7 +72,8 @@ class ProjectDatabaseService {
         .rawDelete('DELETE FROM project_info WHERE id = ?', [id]);
     //上面这条语句等价于下面这条语句
     //int count=await database.delete("user_info",where: 'name = ?', whereArgs: ['徐晖']);
-
+    HoleDatabaseService holeDatabaseService =HoleDatabaseService();
+    await holeDatabaseService.deleteGroup(id);
     if (kDebugMode) {
       print('删除表中id字段为$id的记录，共删除$count条记录');
     }
