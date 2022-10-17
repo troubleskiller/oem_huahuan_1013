@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/model/peoject_model.dart';
+import 'package:oem_huahuan_1013/screen/measure/hole_screen.dart';
 
 class MeasureEventList extends StatelessWidget {
   const MeasureEventList({Key? key, required this.projectModel, required this.deleteProject})
@@ -11,11 +12,11 @@ class MeasureEventList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) =>
-        //             MeasureDetailScreen(group: ProjectModel.id)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HoleScreen(group: projectModel.id)));
       },
       onHorizontalDragStart: (DragStartDetails dragStartDetails){
 
