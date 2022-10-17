@@ -7,10 +7,10 @@ class MeasureHoleList extends StatelessWidget {
   const MeasureHoleList({
     Key? key,
     required this.holeModel,
-    // required this.longPressFunction,
+    required this.deleteHole,
   }) : super(key: key);
   final HoleModel holeModel;
-  // final Function longPressFunction;
+  final Function deleteHole;
 
   @override
   Widget build(BuildContext context) {
@@ -165,25 +165,31 @@ class MeasureHoleList extends StatelessWidget {
           context: context,
         );
       },
-      child: Container(
-        decoration:
-        BoxDecoration(border: Border.all(width: 1), color: Colors.white),
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            CommonLineForEvent(
-                lineName: '序号:', lineEvent: holeModel.id.toString()),
-            CommonLineForEvent(lineName: '名称:', lineEvent: holeModel.name),
-            CommonLineForEvent(
-                lineName: '孔深:', lineEvent: holeModel.holeWidth.toString()),
-            CommonLineForEvent(
-                lineName: '孔部预留:', lineEvent: holeModel.restForTop.toString()),
-            CommonLineForEvent(
-                lineName: '测量间隔:', lineEvent: holeModel.sideBet.toString()),
-            CommonLineForEvent(
-                lineName: '创建时间:', lineEvent: holeModel.dateTime.toString()),
-          ],
+      child: Dismissible(
+        key: UniqueKey(),
+        onDismissed: (DismissDirection direction){
+          if(direction==DismissDirection.startToEnd){
+            deleteHole();
+          }
+        },
+        direction: DismissDirection.startToEnd,
+        child: Container(
+          decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(20))),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Column(
+            children: [
+              CommonLineForEvent(lineName: '名称:', lineEvent: holeModel.name),
+              CommonLineForEvent(
+                  lineName: '孔深:', lineEvent: holeModel.holeWidth.toString()),
+              CommonLineForEvent(
+                  lineName: '孔部预留:', lineEvent: holeModel.restForTop.toString()),
+              CommonLineForEvent(
+                  lineName: '测量间隔:', lineEvent: holeModel.sideBet.toString()),
+              CommonLineForEvent(
+                  lineName: '创建时间:', lineEvent: holeModel.dateTime.toString()),
+            ],
+          ),
         ),
       ),
       // onLongPress: longPressFunction(),

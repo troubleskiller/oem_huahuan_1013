@@ -51,6 +51,9 @@ class _HoleScreenState extends State<HoleScreen> {
       holeWidgets.add(
         MeasureHoleList(
           holeModel: hole,
+          deleteHole: () {
+            _holeDatabaseService.deleteRow(hole.id);
+          },
         ),
       );
     }
@@ -63,8 +66,43 @@ class _HoleScreenState extends State<HoleScreen> {
         context: context,
         builder: (context) {
           return RenameDialog(
-            contentWidget: Container()
-          );
+              contentWidget: HoleDialogContent(
+            title: '新建测量孔',
+            cancelBtnTap: () {
+              _nameController.clear();
+              _depthController.clear();
+              _topController.clear();
+              _sideController.clear();
+              _describeController.clear();
+            },
+            okBtnTap: () async {
+              DateTime date = DateTime.now();
+              String timestamp =
+                  "${date.year.toString()}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}";
+
+              await _holeDatabaseService.addRow(
+                  widget.group,
+                  _nameController.text,
+                  double.parse(_depthController.text),
+                  double.parse(_topController.text),
+                  double.parse(_sideController.text),
+                  timestamp);
+              _nameController.clear();
+              _depthController.clear();
+              _topController.clear();
+              _sideController.clear();
+              _describeController.clear();
+              _holes = await _holeDatabaseService.selectRow(widget.group);
+              Navigator.of(context).pop();
+
+              setState(() {});
+            },
+            describeController: _describeController,
+            nameController: _nameController,
+            sideController: _sideController,
+            topController: _topController,
+            depthController: _depthController,
+          ));
         });
     // final result = await Navigator.push(context, _createRoute(_eventData));
     // if (result != null) {
@@ -75,11 +113,6 @@ class _HoleScreenState extends State<HoleScreen> {
 
   @override
   void dispose() {
-    // _nameController.dispose();
-    // _describeController.dispose();
-    // _sideController.dispose();
-    // _topController.dispose();
-    // _depthController.dispose();
     super.dispose();
   }
 

@@ -68,7 +68,7 @@ class _MeasureMainScreenState extends State<MeasureMainScreen> {
         context: context,
         builder: (context) {
           return RenameDialog(
-            contentWidget: RenameDialogContent(
+            contentWidget: ProjectDialogContent(
               title: "新建一个项目",
               okBtnTap: () async {
                 DateTime date = DateTime.now();

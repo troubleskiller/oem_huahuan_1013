@@ -84,7 +84,7 @@ class HoleDatabaseService {
     //int count=await database.delete("user_info",where: 'name = ?', whereArgs: ['徐晖']);
 
     if (kDebugMode) {
-      print('删除表中所有name字段为徐晖的记录，共删除$count条记录');
+      print('删除表中所有id字段为$id的记录，共删除$count条记录');
     }
   }
 
