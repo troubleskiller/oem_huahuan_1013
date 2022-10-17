@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:oem_huahuan_1013/database/measure_database.dart';
 import 'package:oem_huahuan_1013/model/hole_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -82,7 +83,8 @@ class HoleDatabaseService {
     await database.rawDelete('DELETE FROM hole_info WHERE id = ?', [id]);
     //上面这条语句等价于下面这条语句
     //int count=await database.delete("user_info",where: 'name = ?', whereArgs: ['徐晖']);
-
+    MeasureDatabaseService measureDatabaseService = MeasureDatabaseService();
+    await measureDatabaseService.deleteGroup(id);
     if (kDebugMode) {
       print('删除表中所有id字段为$id的记录，共删除$count条记录');
     }

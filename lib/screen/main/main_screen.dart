@@ -2,6 +2,7 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/screen/measure/project_screen.dart';
 import 'package:oem_huahuan_1013/screen/test/test_connect_screen.dart';
+import 'package:oem_huahuan_1013/screen/watch_man/watch_man_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -39,6 +40,13 @@ class MainScreen extends StatelessWidget {
             borderRadius:BorderRadius.circular(15),
             text: '查询',
             fontSize: 40,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => SearchMainScreen(),
+                ),
+              );
+            },
           ),
           BrnNormalButton(
             insertPadding:EdgeInsets.symmetric(vertical: 10,horizontal: 30),
