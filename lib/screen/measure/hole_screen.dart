@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/database/hole_database.dart';
 import 'package:oem_huahuan_1013/model/hole_model.dart';
+import 'package:oem_huahuan_1013/widget/common_widget/common_app_bar.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/dialog_widget.dart';
 import 'package:oem_huahuan_1013/widget/measure_widget/hole_list.dart';
 
@@ -119,22 +120,8 @@ class _HoleScreenState extends State<HoleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          '测量',
-          style: TextStyle(color: Colors.black),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        centerTitle: true,
+      appBar:CustomTopAppBar(
+        title: '孔选择',
       ),
       body: Container(
           color: Colors.black12,
@@ -150,6 +137,7 @@ class _HoleScreenState extends State<HoleScreen> {
         tooltip: '新增条条',
         child: const Icon(Icons.add),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/model/hole_model.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/dialog_widget.dart';
+import 'package:oem_huahuan_1013/widget/project_widget/project_widget.dart';
 
 
 class MeasureHoleList extends StatelessWidget {
@@ -21,7 +22,7 @@ class MeasureHoleList extends StatelessWidget {
           builder: (BuildContext context) {
             //返回内部
             return Container(
-              height: 190,
+              height: 150,
               child: Column(
                 children: [
                   Container(
@@ -174,7 +175,7 @@ class MeasureHoleList extends StatelessWidget {
         },
         direction: DismissDirection.startToEnd,
         child: Container(
-          decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(20))),
+          decoration: BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.all(Radius.circular(20))),
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
@@ -197,21 +198,3 @@ class MeasureHoleList extends StatelessWidget {
   }
 }
 
-class CommonLineForEvent extends StatelessWidget {
-  const CommonLineForEvent(
-      {Key? key, required this.lineName, required this.lineEvent})
-      : super(key: key);
-  final String? lineName;
-  final String? lineEvent;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(lineName ?? ''),
-        Text(lineEvent ?? ''),
-      ],
-    );
-  }
-}
