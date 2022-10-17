@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/screen/login/login_screen.dart';
-import 'package:oem_huahuan_1013/screen/main/main_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'model/measure_detail_model.dart';

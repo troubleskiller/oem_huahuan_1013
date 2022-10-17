@@ -4,11 +4,12 @@ import 'package:sqflite/sqflite.dart';
 
 
 const String databaseName = "project.db";
-bool isInit = false;
+bool isInit = true;
 class ProjectDatabaseService {
   init() async {
       if(!isInit){
         createTable();
+        isInit = true;
       }
   }
 
@@ -63,15 +64,15 @@ class ProjectDatabaseService {
   }
 
   ///删除表中所有name字段为徐晖的记录
-  Future<void> _deleteRow() async {
+  Future<void> deleteRow(int id) async {
     Database database = await _getDatabase();
     int count = await database
-        .rawDelete('DELETE FROM project_info WHERE name = ?', ['徐晖']);
+        .rawDelete('DELETE FROM project_info WHERE id = ?', [id]);
     //上面这条语句等价于下面这条语句
     //int count=await database.delete("user_info",where: 'name = ?', whereArgs: ['徐晖']);
 
     if (kDebugMode) {
-      print('删除表中所有name字段为徐晖的记录，共删除$count条记录');
+      print('删除表中id字段为$id的记录，共删除$count条记录');
     }
   }
 

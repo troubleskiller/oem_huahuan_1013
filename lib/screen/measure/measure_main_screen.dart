@@ -45,11 +45,17 @@ class _MeasureMainScreenState extends State<MeasureMainScreen> {
       projectWidgets.add(
         MeasureEventList(
           projectModel: event,
+          deleteProject: () async {
+            _projectDatabaseService.deleteRow(event.id);
+            project = await _projectDatabaseService.queryEvents();
+            setState(() {});
+          },
         ),
       );
     }
     return projectWidgets;
   }
+
   _queryEvents() async {
     await _projectDatabaseService.init();
     project = await _projectDatabaseService.queryEvents();
@@ -93,8 +99,12 @@ class _MeasureMainScreenState extends State<MeasureMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: CustomTopAppBar(title: '项目选择',),
-      body: ListView(children: _getProjectsList(project),),
+      appBar: CustomTopAppBar(
+        title: '项目选择',
+      ),
+      body: ListView(
+        children: _getProjectsList(project),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _newEvent,
         tooltip: '新增条条',

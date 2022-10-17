@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/model/peoject_model.dart';
 
 class MeasureEventList extends StatelessWidget {
-  const MeasureEventList({Key? key, required this.projectModel})
+  const MeasureEventList({Key? key, required this.projectModel, required this.deleteProject})
       : super(key: key);
   final ProjectModel projectModel;
+  final Function deleteProject;
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +17,33 @@ class MeasureEventList extends StatelessWidget {
         //         builder: (context) =>
         //             MeasureDetailScreen(group: ProjectModel.id)));
       },
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Column(
-          children: [
-            CommonLineForEvent(
-                lineName: '序号:', lineEvent: projectModel.id.toString()),
-            CommonLineForEvent(lineName: '项目名:', lineEvent: projectModel.name),
-            CommonLineForEvent(
-                lineName: '简介:', lineEvent: projectModel.describe),
-            CommonLineForEvent(
-                lineName: '创建时间:', lineEvent: projectModel.dateTime.toString()),
-          ],
+      onHorizontalDragStart: (DragStartDetails dragStartDetails){
+
+      },
+      child: Dismissible(
+        key: UniqueKey(),
+        onDismissed: (DismissDirection direction){
+          if(direction==DismissDirection.startToEnd){
+            deleteProject();
+          }
+        },
+        direction: DismissDirection.startToEnd,
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Column(
+            children: [
+              CommonLineForEvent(
+                  lineName: '序号:', lineEvent: projectModel.id.toString()),
+              CommonLineForEvent(lineName: '项目名:', lineEvent: projectModel.name),
+              CommonLineForEvent(
+                  lineName: '简介:', lineEvent: projectModel.describe),
+              CommonLineForEvent(
+                  lineName: '创建时间:', lineEvent: projectModel.dateTime.toString()),
+            ],
+          ),
         ),
       ),
     );
