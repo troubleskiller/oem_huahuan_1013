@@ -273,12 +273,9 @@ class _SearchMainScreenState extends State<SearchMainScreen> {
                               noM: 0,
                               x: 0,
                               y: 0,
-                              fx: 0,
-                              fy: 0,
-                              tmp: 0,
                               dateTime: '0',
                               depth: curList[i].depth,
-                              isDouble: 2));
+                          ));
                         }
                       }
                       // Navigator.push(

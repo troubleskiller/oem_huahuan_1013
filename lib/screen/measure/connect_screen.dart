@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:oem_huahuan_1013/model/hole_model.dart';
 import 'package:oem_huahuan_1013/model/measure_detail_model.dart';
-import 'package:oem_huahuan_1013/screen/test/test_measure_screen.dart';
+import 'package:oem_huahuan_1013/screen/measure/measure_screen.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/common_app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +25,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
 
   @override
   void initState() {
+    print(widget.isDouble);
     super.initState();
     checkIfConnect();
     _onRefresh();
@@ -38,8 +39,8 @@ class _ConnectScreenState extends State<ConnectScreen> {
             context.read<MeasureDetailModel>().resetDetail(),
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (ctx) => Test(
-                  device: list[0],
+                builder: (ctx) => MeasureScreen(
+                  device: list[0], holeModel: widget.holeModel, isDouble: widget.isDouble,
                 ),
               ),
             ),
@@ -76,8 +77,9 @@ class _ConnectScreenState extends State<ConnectScreen> {
     context.read<MeasureDetailModel>().resetDetail();
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-          builder: (ctx) => Test(
+          builder: (ctx) => MeasureScreen(
             device: device,
+             holeModel: widget.holeModel, isDouble: widget.isDouble,
           )),
     );
   }

@@ -11,43 +11,27 @@ class MeasureModel {
   //y -偏移
   double y;
 
-  //fan x -偏移
-  double fx;
 
-  //fan y -偏移
-  double fy;
-
-  //y -偏移
-  double tmp;
 
   String dateTime;
 
   double depth;
 
-  int isDouble;
 
   MeasureModel({
     required this.noM,
     required this.x,
     required this.y,
-    required this.fx,
-    required this.fy,
-    required this.tmp,
     required this.dateTime,
     required this.depth,
-    required this.isDouble,
   });
 
   factory MeasureModel.fromJson(Map<String, dynamic> parsedJson) {
     return MeasureModel(
       noM: parsedJson['noM'],
-      isDouble: parsedJson['isDouble'],
       x: parsedJson['x'],
       y: parsedJson['y'],
-      tmp: parsedJson['tmp'],
       dateTime: parsedJson['dateTime'],
-      fy: parsedJson['fy'],
-      fx: parsedJson['fx'],
       depth: parsedJson['depth'],
     );
   }
@@ -56,13 +40,9 @@ class MeasureModel {
     return {
       'x': x,
       'y': y,
-      'fx': fx,
-      'fy': fy,
       'datetime': dateTime,
-      'tmp': tmp,
       'noM': noM,
       'depth': depth,
-      'isDouble': isDouble,
     };
   }
 }

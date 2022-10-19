@@ -26,7 +26,7 @@ class MeasureDatabaseService {
   Future<void> _createTable() async {
     Database database = await _getDatabase();
     database.execute(
-        'CREATE TABLE measure_info (id INTEGER PRIMARY KEY, noM INTEGER, x REAL, y REAL, fx REAL, fy REAL, tmp REAL, dateTime TEXT, depth REAL, isDouble INTEGER)');
+        'CREATE TABLE measure_info (id INTEGER PRIMARY KEY, noM INTEGER, x REAL, y REAL, dateTime TEXT, depth REAL )');
   }
 
   ///删除user_info表
@@ -49,11 +49,10 @@ class MeasureDatabaseService {
   }
 
   ///向表中增加一条数据，其中id（主键）自生成，name为徐晖
-  Future<void> addRow(int noM, double x, double y, double fx, double fy,
-      double tmp, double depth, String datetime, int isDouble) async {
+  Future<void> addRow(int noM, double x, double y,double depth, String datetime,) async {
     Database database = await _getDatabase();
     int id = await database.rawInsert(
-        'INSERT INTO measure_info(nom,x,y,fx,fy,tmp,dateTime,depth,isDouble) VALUES("$noM","$x","$y","$fx","$fy","$tmp","$datetime","$depth","$isDouble")');
+        'INSERT INTO measure_info(nom,x,y,dateTime,depth) VALUES("$noM","$x","$y","$datetime","$depth")');
     //上面这条语句等价于下面这条语句
     //int id=await database.insert("user_info", {'name': '徐晖'});
     if (kDebugMode) {
@@ -117,13 +116,9 @@ class MeasureDatabaseService {
       return MeasureModel(
         x: maps[i]['x'],
         y: maps[i]['y'],
-        tmp: maps[i]['tmp'],
         noM: maps[i]['noM'],
         dateTime: maps[i]['dateTime'],
-        fx: maps[i]['fx'],
-        fy: maps[i]['fy'],
         depth: maps[i]['depth'],
-        isDouble: maps[i]['isDouble'],
       );
     }).reversed.toList();
   }
@@ -143,13 +138,9 @@ class MeasureDatabaseService {
       return MeasureModel(
         x: list[i]['x'],
         y: list[i]['y'],
-        fx: list[i]['fx'],
-        fy: list[i]['fy'],
         depth: list[i]['depth'],
-        tmp: list[i]['tmp'],
         noM: list[i]['noM'],
         dateTime: list[i]['dateTime'],
-        isDouble: list[i]['isDouble'],
       );
     }).reversed.toList();
   }
@@ -169,13 +160,9 @@ class MeasureDatabaseService {
       return MeasureModel(
         x: list[i]['x'],
         y: list[i]['y'],
-        fx: list[i]['fx'],
-        fy: list[i]['fy'],
         depth: list[i]['depth'],
-        tmp: list[i]['tmp'],
         noM: list[i]['noM'],
         dateTime: list[i]['dateTime'],
-        isDouble: list[i]['isDouble'],
       );
     }).reversed.toList();
   }
