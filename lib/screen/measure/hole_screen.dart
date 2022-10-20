@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/database/hole_database.dart';
+import 'package:oem_huahuan_1013/database/measure_database.dart';
 import 'package:oem_huahuan_1013/model/hole_model.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/common_app_bar.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/dialog_widget.dart';
@@ -26,6 +27,7 @@ final TextEditingController _depthController = TextEditingController();
 class _HoleScreenState extends State<HoleScreen> {
   List<HoleModel> _holes = <HoleModel>[];
   final HoleDatabaseService _holeDatabaseService = HoleDatabaseService();
+  final MeasureDatabaseService _measureDatabaseService = MeasureDatabaseService();
   ScrollController scrollController = ScrollController();
   PageController pageController = PageController();
 
@@ -38,6 +40,7 @@ class _HoleScreenState extends State<HoleScreen> {
 
   _queryHoles() async {
     await _holeDatabaseService.init();
+    await _measureDatabaseService.init();
     _holes = await _holeDatabaseService.selectRow(widget.group);
     print(_holes.length);
     // _events = await _database.queryEvents();

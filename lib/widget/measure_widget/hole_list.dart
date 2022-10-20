@@ -23,8 +23,9 @@ class MeasureHoleList extends StatelessWidget {
           builder: (BuildContext context) {
             //返回内部
             return Container(
-              height: 150,
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
                     margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),

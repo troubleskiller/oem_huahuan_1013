@@ -31,7 +31,7 @@ class _MeasureScreenState extends State<MeasureScreen> {
   late DateTime dateTime;
 
   int holeCount = 0;
-  int testCount = 1;
+  int testCount = 0;
 
   int antiCount = 0;
   int preCount = 0;
@@ -179,18 +179,16 @@ class _MeasureScreenState extends State<MeasureScreen> {
                     if (holeCount == 1) {
                       hasTest = true;
                     }
+                    if (!widget.isDouble || (widget.isDouble && !done)) {
+                      testCount++;
+                    } else {
+                      testCount--;
+                    }
                     measureMainList.add([
                       detailModel.x ?? 0,
                       detailModel.y ?? 0,
-                      widget.holeModel.sideBet * testCount
+                      widget.holeModel.sideBet * testCount-widget.holeModel.holeWidth
                     ]);
-                    if(holeCount!=1){
-                      if(!widget.isDouble||(widget.isDouble&&!done)){
-                        testCount++;
-                      }else{
-                        testCount--;
-                      }
-                    }
                     setState(() {
                       holeCount--;
                     });
@@ -208,15 +206,12 @@ class _MeasureScreenState extends State<MeasureScreen> {
                     if (holeCount == 0) {
                       hasTest = false;
                     }
-                    measureMainList.removeLast();
-
-                    if(holeCount!=1){
-                      if(!widget.isDouble||(widget.isDouble&&!done)){
-                        testCount--;
-                      }else{
-                        testCount++;
-                      }
+                    if (!widget.isDouble || (widget.isDouble && !done)) {
+                      testCount--;
+                    } else {
+                      testCount++;
                     }
+                    measureMainList.removeLast();
 
                     setState(() {
                       holeCount++;
@@ -261,9 +256,9 @@ class _MeasureScreenState extends State<MeasureScreen> {
                           mainButtonOnTap: () {
                             done = true;
                             hasTest = false;
-                            holeCount =preCount;
-                            measureSecondList=measureMainList;
-                            measureMainList=[];
+                            holeCount = preCount;
+                            measureSecondList = measureMainList;
+                            measureMainList = [];
 
                             setState(() {});
                           },

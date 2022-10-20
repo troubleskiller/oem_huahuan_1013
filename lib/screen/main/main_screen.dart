@@ -65,6 +65,16 @@ class MainScreen extends StatelessWidget {
           SizedBox(
             height: 40,
           ),
+          BrnNormalButton(
+            insertPadding:EdgeInsets.symmetric(vertical: 10,horizontal: 30),
+            backgroundColor: Colors.blue,
+            borderRadius:BorderRadius.circular(15),
+            text: '初始化数据库',
+            fontSize: 40,
+            onTap: () {
+
+            },
+          ),
           Align(
 
             child: Text('©️华桓电子科技有限公司',

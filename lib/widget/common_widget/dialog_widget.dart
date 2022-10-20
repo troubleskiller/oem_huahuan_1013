@@ -54,6 +54,7 @@ class _ProjectDialogContentState extends State<ProjectDialogContent> {
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
         alignment: Alignment.bottomCenter,
         height: 280,
+        width: 500,
         child: ListView(
           children: [
             Container(
@@ -187,6 +188,7 @@ class _HoleDialogContentState extends State<HoleDialogContent> {
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
         alignment: Alignment.bottomCenter,
         height: 460,
+        width: 500,
         child: ListView(
           children: [
             Container(

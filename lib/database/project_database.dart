@@ -6,12 +6,12 @@ import 'hole_database.dart';
 
 
 const String databaseName = "project.db";
-bool isInit = true;
+bool projectIsInit = false;
 class ProjectDatabaseService {
   init() async {
-      if(!isInit){
-        createTable();
-        isInit = true;
+      if(!projectIsInit){
+        await createTable();
+        projectIsInit = true;
       }
   }
 

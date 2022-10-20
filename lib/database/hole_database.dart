@@ -5,12 +5,12 @@ import 'package:sqflite/sqflite.dart';
 
 
 const String databaseName = "hole.db";
-bool isInit = false;
+bool holeIsInit = false;
 class HoleDatabaseService {
   init() async {
-    if(!isInit){
+    if(!holeIsInit){
       await _createTable();
-      isInit = true;
+      holeIsInit = true;
     }
   }
 

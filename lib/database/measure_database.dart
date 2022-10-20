@@ -4,10 +4,13 @@ import 'package:sqflite/sqflite.dart';
 
 
 const String databaseName = "measure.db";
-
+bool measureIsInit = false;
 class MeasureDatabaseService {
-  init() async {
-    await _createTable();
+  init()async{
+      if(!measureIsInit){
+       await _createTable();
+        measureIsInit = true;
+    }
   }
 
   Future<Database> _getDatabase() async {
