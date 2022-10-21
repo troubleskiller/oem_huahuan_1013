@@ -6,6 +6,7 @@ import 'package:oem_huahuan_1013/database/project_database.dart';
 import 'package:oem_huahuan_1013/model/hole_model.dart';
 import 'package:oem_huahuan_1013/model/measure_detail_model.dart';
 import 'package:oem_huahuan_1013/model/peoject_model.dart';
+import 'package:oem_huahuan_1013/screen/watch_man/measure_excel.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/common_app_bar.dart';
 
 class SearchMainScreen extends StatefulWidget {
@@ -309,13 +310,13 @@ class _SearchMainScreenState extends State<SearchMainScreen> {
                 ),
               ),
               onTap: () async {
-                // List<MeasureModel> measureList = await _measureDatabaseService
-                //     .selectDate(selectMeasureItemValue);
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             MeasureExcel(measureList: measureList)));
+                List<MeasureModel> measureList = await _measureDatabaseService
+                    .selectDate(selectMeasureItemValue);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            MeasureExcel(measureList: measureList)));
               },
             ),
           ],),
