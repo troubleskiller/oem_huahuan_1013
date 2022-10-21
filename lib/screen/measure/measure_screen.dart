@@ -93,7 +93,15 @@ class _MeasureScreenState extends State<MeasureScreen> {
     ///should do
     widget.device.state.listen((state) {
       if (state == BluetoothDeviceState.disconnected) {
-        Navigator.pop(context);
+        BrnDialogManager.showSingleButtonDialog(context,
+            label: "确定",
+            title: '提示',
+            warning: '蓝牙已断开连接，请重新连接！', onTap: () {
+              // BrnToast.show('知道了', context);
+              Navigator.pop(context);
+            });
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const MainScreen()));
       }
     });
   }
@@ -280,8 +288,9 @@ class _MeasureScreenState extends State<MeasureScreen> {
                             _measureDatabaseService
                                 .selectRow(widget.holeModel.noM);
                             // measureMainList = [];
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) => const MainScreen()));
+                            widget.device.disconnect();
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) => const MainScreen()));
                           },
                         )
                       : BrnBottomButtonPanel(
@@ -311,10 +320,11 @@ class _MeasureScreenState extends State<MeasureScreen> {
                           print('${a[0]}-------------------');
                         }
 
-                        // saveMeasureData(trueList);
+                        saveMeasureData(trueList);
                         _measureDatabaseService.selectRow(widget.holeModel.noM);
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) => const MainScreen()));
+                        widget.device.disconnect();
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => const MainScreen()));
                       },
                     ),
               const Text(

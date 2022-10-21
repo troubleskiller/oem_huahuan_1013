@@ -199,7 +199,7 @@ class _SearchMainScreenState extends State<SearchMainScreen> {
             DropdownButton(
               items: holeItems,
               onChanged: (value) {
-                if (selectHoleItemValue != 0) {
+                if (selectMeasureItemValue != '请选择测量时间') {
                   BrnDialogManager.showConfirmDialog(context,
                       title: '监测到目前正处于其他时间选择中',
                       cancel: '取消',

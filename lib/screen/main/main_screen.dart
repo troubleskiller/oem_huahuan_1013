@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:oem_huahuan_1013/screen/measure/project_screen.dart';
 import 'package:oem_huahuan_1013/screen/test/test_connect_screen.dart';
 import 'package:oem_huahuan_1013/screen/watch_man/watch_man_screen.dart';
+import 'package:oem_huahuan_1013/widget/common_widget/common_app_bar.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -10,8 +11,9 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('主页'),
+      appBar: CustomTopAppBar(
+        title: '主页',
+        showBackBtn: false,
       ),
       body: Center(
           child: Column(
