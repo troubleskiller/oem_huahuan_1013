@@ -6,6 +6,7 @@ import 'package:oem_huahuan_1013/database/project_database.dart';
 import 'package:oem_huahuan_1013/model/hole_model.dart';
 import 'package:oem_huahuan_1013/model/measure_detail_model.dart';
 import 'package:oem_huahuan_1013/model/peoject_model.dart';
+import 'package:oem_huahuan_1013/screen/watch_man/chart_line_screen.dart';
 import 'package:oem_huahuan_1013/screen/watch_man/measure_excel.dart';
 import 'package:oem_huahuan_1013/widget/common_widget/common_app_bar.dart';
 
@@ -279,13 +280,13 @@ class _SearchMainScreenState extends State<SearchMainScreen> {
                           ));
                         }
                       }
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => ChartBreakLine(
-                      //           curList: curList,
-                      //           preList: preList,
-                      //         )));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChartBreakLine(
+                                curList: curList,
+                                preList: preList,
+                              )));
                     },
                     onCancel: () {
                       BrnToast.show("取消", context);
