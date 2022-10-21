@@ -76,10 +76,10 @@ class MeasureDatabaseService {
   }
 
   ///删除表中所有name字段为徐晖的记录
-  Future<void> deleteRow() async {
+  Future<void> deleteRow(int noM) async {
     Database database = await _getDatabase();
     int count =
-    await database.rawDelete('DELETE FROM measure_info WHERE id = ?', [1]);
+    await database.rawDelete('DELETE FROM measure_info WHERE noM = ?', [noM]);
     //上面这条语句等价于下面这条语句
     //int count=await database.delete("user_info",where: 'name = ?', whereArgs: ['徐晖']);
 

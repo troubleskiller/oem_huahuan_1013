@@ -179,16 +179,41 @@ class _MeasureScreenState extends State<MeasureScreen> {
                     if (holeCount == 1) {
                       hasTest = true;
                     }
-                    if (!widget.isDouble || (widget.isDouble && !done)) {
+
+                    widget.isDouble
+                        ? done
+                            ? () {
+                                measureMainList[testCount][0] =
+                                    (measureMainList[testCount][0] -
+                                            detailModel.x!) /
+                                        2;
+                                measureMainList[testCount][1] =
+                                    (measureMainList[testCount][1] -
+                                            detailModel.y!) /
+                                        2;
+                              }
+                            : measureMainList.add([
+                                detailModel.x ?? 0,
+                                detailModel.y ?? 0,
+                                widget.holeModel.sideBet * testCount -
+                                    widget.holeModel.holeWidth
+                              ])
+                        : measureMainList.add([
+                            detailModel.x ?? 0,
+                            detailModel.y ?? 0,
+                            widget.holeModel.sideBet * testCount -
+                                widget.holeModel.holeWidth
+                          ]);
+                    // if (!widget.isDouble ||
+                    //     (widget.isDouble && !done)) {
+                    if (holeCount != 1) {
                       testCount++;
-                    } else {
-                      testCount--;
                     }
-                    measureMainList.add([
-                      detailModel.x ?? 0,
-                      detailModel.y ?? 0,
-                      widget.holeModel.sideBet * testCount-widget.holeModel.holeWidth
-                    ]);
+                    // } else {
+                    //   if(holeCount!=1){
+                    //     testCount--;
+                    //   }
+                    // }
                     setState(() {
                       holeCount--;
                     });
@@ -206,11 +231,16 @@ class _MeasureScreenState extends State<MeasureScreen> {
                     if (holeCount == 0) {
                       hasTest = false;
                     }
-                    if (!widget.isDouble || (widget.isDouble && !done)) {
+                    // if (!widget.isDouble ||
+                    //     (widget.isDouble && !done && !hasTest)) {
+                    if (holeCount != preCount - 1) {
                       testCount--;
-                    } else {
-                      testCount++;
                     }
+                    // } else {
+                    //   if(holeCount!=preCount-1){
+                    //     testCount++;
+                    //   }
+                    // }
                     measureMainList.removeLast();
 
                     setState(() {
@@ -242,10 +272,14 @@ class _MeasureScreenState extends State<MeasureScreen> {
                                 depth: a[2],
                               );
                               trueList.add(measureModel);
+
                               // print('${a[0]}-------------------');
                             }
-
                             saveMeasureData(trueList);
+                            // _measureDatabaseService.deleteRow(widget.holeModel.noM);
+                            _measureDatabaseService
+                                .selectRow(widget.holeModel.noM);
+                            // measureMainList = [];
                             // Navigator.push(context,
                             //     MaterialPageRoute(builder: (context) => const MainScreen()));
                           },
@@ -257,9 +291,7 @@ class _MeasureScreenState extends State<MeasureScreen> {
                             done = true;
                             hasTest = false;
                             holeCount = preCount;
-                            measureSecondList = measureMainList;
-                            measureMainList = [];
-
+                            testCount = 0;
                             setState(() {});
                           },
                         )
@@ -279,7 +311,8 @@ class _MeasureScreenState extends State<MeasureScreen> {
                           print('${a[0]}-------------------');
                         }
 
-                        saveMeasureData(trueList);
+                        // saveMeasureData(trueList);
+                        _measureDatabaseService.selectRow(widget.holeModel.noM);
                         // Navigator.push(context,
                         //     MaterialPageRoute(builder: (context) => const MainScreen()));
                       },
